@@ -19,7 +19,7 @@ function createPost(post) {
         setTimeout(() => {
             posts.push(post);
 
-            const error = true;
+            const error = false;
 
             if (!error) {
                 resolve();
@@ -39,9 +39,24 @@ createPost({ title: 'post three', body: 'this is post three'})
 */
 
 // Async / Await
-async function init() {
-    
+// async function init() {
+//      await createPost({title: 'post three', body: 'this is post three'});
+//      getPosts();
+// }
+
+// init();
+
+// Async / Await / Fetch
+async function fetchUsers() {
+     const res = await fetch('https://jsonplaceholder.typicode.com/users');   
+     const date = await res.json();
+
+     console.log(date);
 }
+
+fetchUsers();
+
+
 
 /*
 const promise1 = Promise.resolve('Hello World');
