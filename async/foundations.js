@@ -1,4 +1,8 @@
 /**
+ * ASYNC / AWAIT / PROMISES FOUNDATIONS
+ */
+
+/**
  * Map Function
  */
 const names = ["Bob", "Rob", "Slob"];
@@ -37,7 +41,7 @@ let meetingDetails = {
 };
 
 // Meeting conditional
-const hasMeeting = false;
+const hasMeeting = true;
 
 const meeting = new Promise((resolve, reject) => {
   if (!hasMeeting) {
@@ -58,6 +62,19 @@ const addToCalender = (meetingDetails) => {
   return Promise.resolve(calender);
 };
 
+async function myMeeting() {
+  try {
+    const meetingDetails = await meeting; // will not execute until finished
+    const message = await addToCalender(meetingDetails);
+    console.log(message);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+myMeeting();
+
+/**
 meeting
   .then(addToCalender)
   .then((res) => {
@@ -67,6 +84,7 @@ meeting
   .catch((err) => {
     console.log(err.message);
   });
+ */
 
 //----------------------------------------------------------------
 
@@ -109,13 +127,6 @@ function* generatorFunc() {
  * Express Style Methods
  */
 
-//HOF for Error Catching
-const catchError = (fn) => {
-  return function (req, res, next) {
-    return fn(req, res, next).catch(next);
-  };
-};
-
 // Api call
 const getOrder = async (req, res, next) => {
   const orders = Orders.find({ email: re.user.email });
@@ -132,3 +143,9 @@ Process.on("unhandledRejection", (error) => {
 });
 
 //----------------------------------------------------------------
+/**
+ * Async Await Functions
+ * These are a layer of syntax over Promises and Generator functions
+ * @param {*} fn
+ * @returns
+ */
