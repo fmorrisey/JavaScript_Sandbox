@@ -11,3 +11,5 @@
 ## Keyword
 
 - Lexical Scope: determines where and when the variable or function can be accessed.
+
+- Closures: makes it possible for a function have "private" variables. - W3Schools
