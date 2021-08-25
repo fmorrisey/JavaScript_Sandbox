@@ -103,3 +103,32 @@ function* generatorFunc() {
   yield data;
   console.log(data);
 }
+
+//----------------------------------------------------------------
+/**
+ * Express Style Methods
+ */
+
+//HOF for Error Catching
+const catchError = (fn) => {
+  return function (req, res, next) {
+    return fn(req, res, next).catch(next);
+  };
+};
+
+// Api call
+const getOrder = async (req, res, next) => {
+  const orders = Orders.find({ email: re.user.email });
+  if (!orders.length) throw new Error("No orders found");
+};
+
+// We wrap our routes in one error catch
+// any errors get passed along to next()
+router.get("/orders", catchError(getOrder));
+
+// NodeJs style error handling
+Process.on("unhandledRejection", (error) => {
+  console.log("unhandledRejection", error);
+});
+
+//----------------------------------------------------------------
