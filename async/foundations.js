@@ -90,3 +90,16 @@ Promise.all([promise1, promise2]).then((res) => {
 });
 
 // Promise.race() will only return the first
+
+//----------------------------------------------------------------
+/**
+ * Generator Functions
+ * @param {*} fn
+ * @returns
+ */
+
+function* generatorFunc() {
+  let data = getData();
+  yield data;
+  console.log(data);
+}
