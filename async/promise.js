@@ -49,14 +49,25 @@ createPost({ title: 'post three', body: 'this is post three'})
 // Async / Await / Fetch
 async function fetchUsers() {
      const res = await fetch('https://jsonplaceholder.typicode.com/users');   
-     const date = await res.json();
-
-     console.log(date);
+     const data = await res.json();
+    
+     return data;
 }
 
-fetchUsers();
+async function createList(data) {
+    let list = '';
+    console.log(data);
+    await setTimeout(() => {
+        [...data].forEach((item, index) => {
+            list += `<li>${index}${item}<li>`
+        }) 
+        document.getElementById(dataList)
+    })
+}
 
 
+const users = fetchUsers();
+createList(users);
 
 /*
 const promise1 = Promise.resolve('Hello World');
@@ -68,3 +79,13 @@ const promise4 = fetch('https://jsonplaceholder.typicode.com/users')
 
 Promise.all([promise1, promise2, promise3, promise4]).then(values => console.log(values));
 */
+
+// MicroTask
+function greatMe() {
+    Promise.resolve().then(() => console.log('HEY!'));
+    console.log("Yo!");
+    // yo
+    // hey!
+}
+
+greatMe();
