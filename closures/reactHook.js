@@ -22,6 +22,14 @@ const React = (function () {
     return [state, setState];
   }
 
+  function workLoop() {
+    idx = 0;
+    render(hooks)();
+    setTimeout(workLoop, 300);
+  }
+
+  setTimeout(workLoop, 300);
+
   function render(Component) {
     idx = 0;
     const C = Component();
@@ -29,13 +37,31 @@ const React = (function () {
     return C;
   }
 
-  return { useState, render }; // exposes it from the module
+  function useEffect(cb, depArray) {
+    const oldDeps = hooks[idx];
+    let hasChanged = true;
+    if (oldDeps) {
+      hasChanged = depArray.some((dep, i) => !Object.is(dep, oldDeps[i]));
+    }
+
+    if (hasChanged) cb();
+    hooks[idx] = depArray;
+    idx++;
+  }
+
+  return { useState, useEffect, render }; // exposes it from the module
 })();
 
 // COMPONENT
 function Component() {
   const [count, setCount] = React.useState(1);
   const [text, setText] = React.useState("apple");
+
+  React.useEffect(() => {
+    // Uses a callback
+    console.log("REAACCCTTT");
+  }, [text]); // with an optional dependency array
+
   return {
     render: () => console.log({ count, text }),
     click: () => setCount(count + 1),
