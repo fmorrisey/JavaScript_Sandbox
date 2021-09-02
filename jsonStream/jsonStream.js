@@ -31,9 +31,17 @@ function systemOut(output, entry) {
     ? console.log(output, system_abnormal)
     : console.log(output); // Default
 
-  entry.coordinates.location === "surface"
-    ? console.log("LANDING SUCCESSFUL!!!!!!!!")
-    : null;
+  if (
+    entry.coordinates.location === "surface" &&
+    entry.coordinates.distance < 5 &&
+    entry.system === "nominal"
+  ) {
+    console.log("LANDING SUCCESSFUL!!!!!!!!");
+  }
+
+  if (entry.coordinates.location === "surface" && entry.system === "abnormal") {
+    console.log("%cABNORMAL LANDING \n Check Vehicle Status", system_abnormal);
+  }
 }
 
 function getTime() {

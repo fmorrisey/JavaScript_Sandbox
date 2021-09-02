@@ -80,7 +80,7 @@ export const flightData = [
     system: "nominal",
     coordinates: {
       location: "surface",
-      distance: 0,
+      distance: 2,
     },
   },
 ];
