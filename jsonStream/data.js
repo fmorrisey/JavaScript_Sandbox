@@ -23,7 +23,16 @@ export const flightData = [
       earth_local: null,
     },
     status: "descending",
-    system: "nominal",
+    system: "warn",
+    location: "atmosphere",
+  },
+  {
+    time: {
+      mars_local: "2012-04-23T18:25:43.511Z",
+      earth_local: null,
+    },
+    status: "descending",
+    system: "abnormal",
     location: "atmosphere",
   },
   {
