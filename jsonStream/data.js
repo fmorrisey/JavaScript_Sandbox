@@ -6,7 +6,10 @@ export const flightData = [
     },
     status: "descending",
     system: "nominal",
-    location: "orbit",
+    coordinates: {
+      location: "orbit",
+      distance: 12631,
+    },
   },
   {
     time: {
@@ -15,7 +18,10 @@ export const flightData = [
     },
     status: "descending",
     system: "nominal",
-    location: "orbit",
+    coordinates: {
+      location: "orbit",
+      distance: 9000,
+    },
   },
   {
     time: {
@@ -24,7 +30,10 @@ export const flightData = [
     },
     status: "descending",
     system: "warn",
-    location: "atmosphere",
+    coordinates: {
+      location: "atmosphere",
+      distance: 6000,
+    },
   },
   {
     time: {
@@ -33,7 +42,10 @@ export const flightData = [
     },
     status: "descending",
     system: "abnormal",
-    location: "atmosphere",
+    coordinates: {
+      location: "atmosphere",
+      distance: 5000,
+    },
   },
   {
     time: {
@@ -42,7 +54,10 @@ export const flightData = [
     },
     status: "deployment",
     system: "nominal",
-    location: "atmosphere",
+    coordinates: {
+      location: "atmosphere",
+      distance: 1000,
+    },
   },
   {
     time: {
@@ -51,7 +66,10 @@ export const flightData = [
     },
     status: "landing",
     system: "nominal",
-    location: "approach",
+    coordinates: {
+      location: "atmosphere",
+      distance: 500,
+    },
   },
   {
     time: {
@@ -60,6 +78,9 @@ export const flightData = [
     },
     status: "touch down",
     system: "nominal",
-    location: "surface",
+    coordinates: {
+      location: "surface",
+      distance: 0,
+    },
   },
 ];
