@@ -23,25 +23,39 @@ function systemOut(output, entry) {
     system_warn = "color: yellow;",
     system_abnormal = "color: red";
 
-  entry.system === "nominal" // Nominal SysStat
-    ? console.log(output, system_nominal)
-    : entry.system === "warn" // Warn SysStat
-    ? console.log(output, system_warn)
-    : entry.system === "abnormal" // Abnormal SysStat
-    ? console.log(output, system_abnormal)
-    : console.log(output); // Default
-
-  if (
-    entry.coordinates.location === "surface" &&
-    entry.coordinates.distance < 5 &&
-    entry.system === "nominal"
-  ) {
-    console.log("LANDING SUCCESSFUL!!!!!!!!");
+  function systemCheck() {
+    entry.system === "nominal" // Nominal SysStat
+      ? console.log(output, system_nominal)
+      : entry.system === "warn" // Warn SysStat
+      ? console.log(output, system_warn)
+      : entry.system === "abnormal" // Abnormal SysStat
+      ? console.log(output, system_abnormal)
+      : console.log(output); // Default
   }
 
-  if (entry.coordinates.location === "surface" && entry.system === "abnormal") {
-    console.log("%cABNORMAL LANDING \n Check Vehicle Status", system_abnormal);
+  function landingCheck() {
+    systemCheck();
+    console.log("I Ran!");
+    if (
+      entry.coordinates.location === "surface" &&
+      entry.coordinates.distance < 5 &&
+      entry.system === "nominal"
+    ) {
+      console.log("LANDING SUCCESSFUL!!!!!!!!");
+    }
+
+    if (
+      entry.coordinates.location === "surface" &&
+      entry.system === "abnormal"
+    ) {
+      console.log(
+        "%cABNORMAL LANDING \n Check Vehicle Status",
+        system_abnormal
+      );
+    }
   }
+
+  entry.coordinates.distance < 1000 ? landingCheck() : systemCheck();
 }
 
 function getTime() {
