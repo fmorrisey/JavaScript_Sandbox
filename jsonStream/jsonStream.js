@@ -1,41 +1,47 @@
 import { flightData } from "./data.js";
 
 var timeStamp;
-var system_nominal = "color: #bada55";
-var system_warn = "color: yellow;";
-var system_abnormal = "color: red";
 
 function stream(input) {
   var now, output;
   input.forEach((entry, index) => {
     setTimeout(() => {
-      now = getTime();
-      entry.time.earth_local = now;
-      output = `Mars | ${entry.time.mars_local} \n
-                Earth| ${entry.time.earth_local}`;
-      output += `\n %c ${entry.system}`;
+      entry.time.earth_local = getTime();
 
-      if (entry.system === "nominal") {
-        console.log(output, system_nominal);
-      }
-      if (entry.system === "warn") {
-        console.log(output, system_warn);
-      }
-      if (entry.system === "abnormal") {
-        console.log(output, system_abnormal);
-      }
+      output =
+        `Mars | ${entry.time.mars_local} \n` +
+        `Earth| ${entry.time.earth_local}\n` +
+        `${entry.coordinates.location} | ${entry.coordinates.distance} mtrs\n` +
+        `%c${entry.system}`;
+      systemOut(output, entry);
     }, index * 2000);
   });
 }
 
-console.log(`Landing...`, flightData);
-stream(flightData);
+function systemOut(output, entry) {
+  var system_nominal = "color: #bada55",
+    system_warn = "color: yellow;",
+    system_abnormal = "color: red";
+
+  entry.system === "nominal" // Nominal SysStat
+    ? console.log(output, system_nominal)
+    : entry.system === "warn" // Warn SysStat
+    ? console.log(output, system_warn)
+    : entry.system === "abnormal" // Abnormal SysStat
+    ? console.log(output, system_abnormal)
+    : console.log(output); // Default
+
+  entry.coordinates.location === "surface"
+    ? console.log("LANDING SUCCESSFUL!!!!!!!!")
+    : null;
+}
 
 function getTime() {
   return (timeStamp = new Date().toISOString());
 }
 
-console.log(now);
+console.log(`Landing...`, flightData);
+stream(flightData);
 
 /**
  * ForEach setTimeOut Solution: https://stackoverflow.com/a/37977977/12888553
